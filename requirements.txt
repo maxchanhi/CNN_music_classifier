@@ -2,4 +2,5 @@ numpy
 librosa
 keras
 tensorflow
-keras.models
+numpy.core._multiarray_umath
+numpy.core.umath

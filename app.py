@@ -1,10 +1,8 @@
 import streamlit as st
 import numpy as np
 import librosa
-import tensorflow as tf
 from keras.models import load_model
 import io
-import soundfile as sf
 
 # Load and compile the model
 model = load_model('music_genre_model.h5')
@@ -12,8 +10,6 @@ model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=
 
 # Define genre labels (adjust these to match your model's output)
 genres ={1:"metal",3:"blues",5:"classical",8:"country",0:"disco",7:"hiphop",9:"jazz",6:"rock",4:"reggae",2:"pop"}
-
-#['blues', 'metal','classical', 'country', 'disco', 'hiphop', 'jazz',  'pop', 'reggae', 'rock']
 
 def process_audio(audio_file, sr=22050, duration=30):
     y, sr = librosa.load(audio_file, sr=sr, duration=duration)
@@ -28,6 +24,7 @@ def process_audio(audio_file, sr=22050, duration=30):
 st.title('Music Genre Classification')
 
 uploaded_file = st.file_uploader("Choose a music file", type=['wav', 'mp3', 'ogg'])
+
 
 if uploaded_file is not None:
     st.audio(uploaded_file, format='audio/wav')
@@ -47,3 +44,7 @@ if uploaded_file is not None:
     except Exception as e:
         st.error(f"An error occurred while processing the audio: {str(e)}")
         st.error("Please make sure you've uploaded a valid audio file.")
+else:
+    st.write("Supported genres:")
+    supported_genres = ['blues', 'metal', 'classical', 'country', 'disco', 'hiphop', 'jazz', 'pop', 'reggae', 'rock']
+    st.write(", ".join(supported_genres))

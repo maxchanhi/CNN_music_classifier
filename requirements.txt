@@ -1,4 +1,4 @@
-pip --upgrade
+pip --upgdate
 numpy
 librosa
 keras

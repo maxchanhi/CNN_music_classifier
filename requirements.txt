@@ -3,4 +3,4 @@ numpy
 librosa
 keras
 tf-nightly
-st_audiorec
+streamlit-audiorec
